@@ -5,6 +5,9 @@ import Header from '../config'
 import dynamic from 'next/dynamic'
 import Dom from '@/components/layout/_dom'
 
+import AuthState from '../context/auth/authState';
+import AppState from '../context/app/appState';
+
 import '@/styles/index.css'
 
 let LCanvas = null
@@ -47,8 +50,12 @@ function App({ Component, pageProps = {} }) {
   }, [router])
   return (
     <>
-      <Header title={pageProps.title} />
-      <ForwardPropsToR3fComponent comp={Component} pageProps={pageProps} />
+    <AuthState>
+      <AppState>
+        <Header title={pageProps.title} />
+        <ForwardPropsToR3fComponent comp={Component} pageProps={pageProps} />
+      </AppState>
+    </AuthState>
     </>
   )
 }
