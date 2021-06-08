@@ -2,3 +2,25 @@
 --------- git command ----------
 
 git status -u
+
+
+--------- Tailwind not recognise -------
+
+We add tailwind with Layout.js component that contain next/head component to add tailwind, but the template already use next/head in config.js component that is added in _app.js page, that's to say, all pages contain config.js component and this component overwrite my Layout.js component. Therefore we add tailwind script inside config.js component rather than layout.js component.
+
+-------- axios api not work -----------
+
+axios get api from frontend uri, this was because this line in axios.js:
+
+const clienteAxios = axios.create({
+    baseURL: process.env.backendURL		// environment not recognise by next
+});
+
+the problem was solved with:
+
+const clienteAxios = axios.create({
+    baseURL: process.env.backendURL || 'http://127.0.0.1:4000'
+});
+
+Important: if i put http://localhost:4000 rather than http://127.0.0.1:4000 not work because nextjs need numbers no words, 
+the words are carried away by the wind

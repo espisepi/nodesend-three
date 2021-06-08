@@ -4,6 +4,8 @@ import Header from './Header';
 
 
 const Layout = ({children}) => {
+    console.log('NO SE UTILIZA ESTA CLASE, SE UTILIZA LA CLASE config.js y ahi anadimos el tailwind')
+    console.log('oliiii, este mensaje no se ve en consola :(')
     return ( 
         <>
             <Head>
