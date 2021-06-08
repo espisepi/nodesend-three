@@ -25,18 +25,20 @@ const Index = () => {
    
   }, []);
 
+  const frontendURL = process.env.frontendURL || 'http://localhost:3000'
+
   return ( 
     <Layout>
         <div className="md:w-4/5 xl:w-3/5 mx-auto mb-32">
           { url ? (
             <>
               <p className="text-center text-2xl mt-10">
-                  <span className="font-bold text-red-700 text-3xl uppercase">Tu URL es:</span> {`${process.env.frontendURL}/enlaces/${url}`} 
+                  <span className="font-bold text-red-700 text-3xl uppercase">Tu URL es:</span> {`${frontendURL}/enlaces/${url}`} 
               </p>
               <button 
                   type="button"
                   className="bg-red-500 hover:bg-gray-900 w-full p-2 text-white uppercase font-bold mt-10"
-                  onClick={() => navigator.clipboard.writeText(`${process.env.frontendURL}/enlaces/${url}`) }
+                  onClick={() => navigator.clipboard.writeText(`${frontendURL}/enlaces/${url}`) }
               >Copiar Enlace</button>
             </>
           ) : (
