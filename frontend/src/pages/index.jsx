@@ -27,7 +27,8 @@ const Index = () => {
 
   const frontendURL = process.env.frontendURL || 'http://localhost:3000'
 
-  return ( 
+  return (
+    <>
     <Layout>
         <div className="md:w-4/5 xl:w-3/5 mx-auto mb-32">
           { url ? (
@@ -63,6 +64,7 @@ const Index = () => {
           )}
         </div>
     </Layout>
+    </>
    );
 }
  
