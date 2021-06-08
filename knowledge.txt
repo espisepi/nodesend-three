@@ -24,3 +24,10 @@ const clienteAxios = axios.create({
 
 Important: if i put http://localhost:4000 rather than http://127.0.0.1:4000 not work because nextjs need numbers no words, 
 the words are carried away by the wind
+
+
+--------- drei useGLTF not work -------------
+
+Error: webgl context error
+
+Solution: React <Suspense fallback={null}> {children} </Suspense> inside of _canvas.jsx component 

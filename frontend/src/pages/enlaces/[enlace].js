@@ -1,8 +1,13 @@
 import Layout from '@/components/dom/Layout';
 import clienteAxios from '@/config/axios';
-import React, {useState, useContext } from 'react';
+import React, {useState, useContext, useEffect } from 'react';
 import appContext from '@/context/app/appContext';
 import Alerta from '@/components/dom/Alerta';
+
+import dynamic from 'next/dynamic'
+const Model = dynamic(() => import('@/components/canvas/Model'), {
+    ssr: false,
+})
 
 export async function getServerSideProps({params}) {
     const { enlace } = params;
@@ -62,7 +67,24 @@ export default ({enlace}) => {
 
     }
 
+    const frontendURL = process.env.frontendURL || 'http://localhost:3000'
+    const backendURL = process.env.backendURL || 'http://localhost:4000'
+
+    useEffect(() => {
+        const div_canvas = document.getElementById('div_canvas')
+        const { zIndex, width, height, top } = div_canvas.style // copy to restore default values
+        div_canvas.style.zIndex = 2000
+        div_canvas.style.width = '100%'
+        div_canvas.style.height = '40vh'
+        div_canvas.style.top = '50vh'
+        console.log(div_canvas)
+        return () => {
+            
+        }
+    }, [])
+
     return (
+        <>
         <Layout>
             {
                 tienePassword ? (
@@ -105,7 +127,7 @@ export default ({enlace}) => {
                         <h1 className="text-4xl text-center text-gray-700">Descarga tu archivo:</h1>
                         <div className="flex items-center justify-center mt-10">
                             <a 
-                                href={`${process.env.backendURL}/api/archivos/${enlace.archivo}`} 
+                                href={`${backendURL}/api/archivos/${enlace.archivo}`} 
                                 className="bg-red-500 text-center px-10 py-3 rounded uppercase font-bold text-white cursor-pointer"
                                 download    
                             >Aquí</a>
@@ -115,5 +137,8 @@ export default ({enlace}) => {
             }
 
         </Layout>
+
+        <Model r3f src={`${backendURL}/api/archivos/${enlace.archivo}`} />
+        </>
     )
 }
