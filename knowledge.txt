@@ -30,4 +30,14 @@ the words are carried away by the wind
 
 Error: webgl context error
 
-Solution: React <Suspense fallback={null}> {children} </Suspense> inside of _canvas.jsx component 
+Solution: Use React.Suspense -> <Suspense fallback={null}> {children} </Suspense> inside of _canvas.jsx component
+
+
+-------- index.jsx not work <Layout> component --------
+
+solution: Use React.Fragment
+<>   <--- solution
+<Layout>
+	blablabla
+</Layout>
+</>  <--- solution
